@@ -41,7 +41,6 @@ export class ApiInterceptor implements HttpInterceptor {
 
   private handleError(token: string, err: any) {
     if (token !== '' && err.status === HttpStatusCode.Unauthorized) {
-      this.customToastService.error(err.error.message);
       this.authService.logout();
     }
     if (token === '' && err.status === HttpStatusCode.Unauthorized && err.url.includes('basicAuth')) {
