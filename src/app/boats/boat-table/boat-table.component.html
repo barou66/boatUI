@@ -1,0 +1,86 @@
+
+<app-nav-header></app-nav-header>
+<div class="flex-container m-5">
+  <div class="row" mb-2>
+    <div class="col-auto me-auto"> <h1 class="font-weight-bold">Boats</h1></div>
+    <div class="col-auto"><button type="button" (click)="addBoat()" class="btn btn-secondary"> <bi name="plus-square-fill" class="big"></bi></button></div>
+  </div>
+  <form>
+    <div class="mb-3 row">
+      <label
+        for="table-complete-search"
+        class="col-xs-3 col-sm-auto col-form-label"
+        >Full text search:</label
+      >
+      <div class="col-xs-3 col-sm-auto">
+        <input
+          id="table-complete-search"
+          type="text"
+          class="form-control"
+          name="searchTerm"
+          [(ngModel)]="dataBoatService.searchTerm"
+        />
+      </div>
+      <span class="col col-form-label" *ngIf="dataBoatService.loading$ | async"
+        >Loading...</span
+      >
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col" sortable="name" (sort)="onSort($event)">Name</th>
+          <th scope="col" sortable="description" (sort)="onSort($event)">
+            Description
+          </th>
+          <th scope="col" sortable="description" (sort)="onSort($event)">
+            Actions
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let boat of boats$ | async">
+          <th scope="row">{{ boat.id }}</th>
+
+          <td>
+            <ngb-highlight
+              [result]="boat.name"
+              [term]="dataBoatService.searchTerm"
+            ></ngb-highlight>
+          </td>
+          <td>
+            <ngb-highlight
+              [result]="boat.description"
+              [term]="dataBoatService.searchTerm"
+            ></ngb-highlight>
+          </td>
+          <td>
+            <button type="button" (click)="boatDetail(boat)" class="btn btn-secondary m-2"><bi name="card-text" class="medium"></bi></button>
+            <button type="button" (click)="updateBoat(boat.id)" class="btn btn-secondary m-2"><bi name="pencil-square" class="medium"></bi></button>
+            <button type="button" (click)="deleteBoat(boat.id)" class="btn btn-secondary m-2"><bi name="x-square-fill" class="medium"></bi></button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-between p-2">
+      <ngb-pagination
+        [collectionSize]="(total$ | async)!"
+        [(page)]="dataBoatService.page"
+        [pageSize]="dataBoatService.pageSize"
+      >
+      </ngb-pagination>
+
+      <select
+        class="form-select"
+        style="width: auto"
+        name="pageSize"
+        [(ngModel)]="dataBoatService.pageSize"
+      >
+        <option [ngValue]="5">5 éléments par page</option>
+        <option [ngValue]="10">10 éléments par page</option>
+        <option [ngValue]="15">15 éléments par page</option>
+      </select>
+    </div>
+  </form>
+</div>

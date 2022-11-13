@@ -1,0 +1,42 @@
+<div class="flex-container m-5">
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-4">
+      <div class="card card-raised">
+        <div class="card-header text-center">
+          <p class="font-weight-bold">Update Boat</p>
+        </div>
+        <div class="card-body px-4">
+          <form [formGroup]="boatForm" novalidate (ngSubmit)="onSubmit()">
+            <!-- Name input -->
+            <div class="form-outline mb-4">
+              <label class="form-label" for="name">Name</label>
+              <input
+                type="text"
+                formControlName="name"
+                class="form-control"
+                required
+              />
+            </div>
+
+            <!-- Description input -->
+            <div class="form-outline mb-4">
+              <label class="form-label" for="description">Description</label>
+              <textarea
+                type="text"
+                formControlName="description"
+                class="form-control"
+                required
+                rows="5"
+              ></textarea>
+            </div>
+
+            <!-- Submit button -->
+            <button type="submit" class="btn btn-primary btn-block mb-4">
+              Update
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

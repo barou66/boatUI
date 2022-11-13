@@ -1,1 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
+/* You can add global styles to this file, and also import other style files *
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+// regular style toast
+@import '~ngx-toastr/toastr';
+
+
+
+.big {
+  height: 50px;
+  width: 50px;
+}
+
+.medium {
+  height: 30px;
+  width: 30px;
+}
